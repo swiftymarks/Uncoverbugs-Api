@@ -13,13 +13,21 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: cHarm3d!
   socket: /tmp/mysql.sock
 
 development:
   <<: *default
+  username: root
+  password: cHarm3d!
   database: uncoverbugs_development
+
+
+staging:
+  <<: *default
+  host: <%= ENV['UNCOVERBUGS_DATABASE_HOST'] %>
+  username: <%= ENV['UNCOVERBUGS_DATABASE_USERNAME'] %>
+  password: <%= ENV['UNCOVERBUGS_DATABASE_PASSWORD'] %>
+  database: uncoverbugs_staging
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
